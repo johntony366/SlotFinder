@@ -1,8 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-function delay(t, v) {
+function delay(t: number, v: any): Promise<ResponseObject> {
   return new Promise((resolve) => setTimeout(resolve, t, v));
 }
+
+type SlotData = Array<Array<number>>;
+
+type ResponseObject = {
+  columns: string[];
+  index: string[];
+  data: SlotData;
+};
 
 const initialState = {
   data: [
@@ -21,7 +29,7 @@ export const getSlots = createAsyncThunk(
   "slots/getSlots",
   async (name, thunkAPI) => {
     try {
-      const response = await delay(3000, {
+      const response = await delay(500, {
         columns: [
           "8",
           "8:10",
@@ -158,7 +166,7 @@ export const getSlots = createAsyncThunk(
   }
 );
 
-const slotsSlice = {
+const slotsSlice = createSlice({
   name: "slots",
   initialState,
   reducers: {},
@@ -168,6 +176,7 @@ const slotsSlice = {
         state.isLoading = true;
       })
       .addCase(getSlots.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.isLoading = false;
         state.data = action.payload;
       })
@@ -176,4 +185,6 @@ const slotsSlice = {
         state.isLoading = false;
       });
   },
-};
+});
+
+export default slotsSlice.reducer;
