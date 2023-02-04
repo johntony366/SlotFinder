@@ -8,3 +8,21 @@
 
   font-size: 10px;
 }
+
+.date-of-the-week {
+  padding-left: 8px;
+}
+
+th,
+td,
+tr {
+  border: 2px solid black;
+}
+
+.zero {
+  background: rgb(255, 116, 116);
+}
+
+.one {
+  background: rgb(146, 255, 116);
+}

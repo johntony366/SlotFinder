@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 
+const _ = require("lodash");
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -16,10 +18,10 @@ export default function Home() {
       </Head>
       <main>
         <div className="center flex h-screen justify-center bg-slate-200">
-          <table className="table-auto">
+          <table className="m-8 table-auto border-spacing-4 rounded-md border-2 border-solid border-gray-400 p-8 text-center">
             <thead>
               <tr className="col-timings">
-                <th></th>
+                <th style={{ writingMode: "unset" }}>Day of the week</th>
                 <th>8:00</th>
                 <th>8:10</th>
                 <th>8:20</th>
@@ -97,9 +99,15 @@ export default function Home() {
             <tbody>
               <tr>
                 <td>Monday</td>
+                {_.times(72, () => (
+                  <td className="zero">0</td>
+                ))}
               </tr>
               <tr>
                 <td>Tuesday</td>
+                {_.times(72, () => (
+                  <td className="one">1</td>
+                ))}
               </tr>
               <tr>
                 <td>Wednesday</td>
